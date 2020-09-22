@@ -1,0 +1,25 @@
+-----------Mutation rate-----------
+Mu:	3.41392248035653e-06 : [3.10207548504093e-06 - 3.74815530367392e-06]
+Ne_spec:	36.138458635742 :[31.4597740342952 - 41.1366837777076]
+Samples used:	196
+Samples without variants	41
+------Effective population size------
+Diffusion model 6 Ne:	34.4440953751257 :[25.1780993548767 - 46.3656608939685]
+NS iSNV n	27
+NS Ne:	27.2648043888906 :[16.1862910300038 - 43.8693567584829]
+S iSNV n	36
+S Ne:	40.3675697684317 :[27.0114003740606 - 58.8697699187479]
+
+Diffusion model 12 Ne:	17
+S Ne 12:	27
+NS Ne 12:	19
+
+Subset median 6 Ne:	42.2113657313173
+Subset IQR 6 Ne:	4.93111058556821
+
+Samples exactly 1 day apart:	
+iSNV in samples exaclty 1 day apart:	
+----------- frequency noise -------
+v:	503.485610868892 : [462.752935355908 - 546.561423359176]
+
+
