@@ -32,7 +32,7 @@ quality_mut<-paste0(qual_min$mutation, qual_min$SPECID)
 (freqs<-freqs %>% mutate(mut_specid = paste0(mutation,SPECID_original), # here we use SPECID_original to match that used in qual above
                          used= mut_specid %in% quality_mut) %>%
     filter(used==T) %>%
-    mutate(meanFreq = map2_dbl(freq1, freq2,~ mean(c(.x,.y)))) %>% select(freq1,freq2,meanFreq))
+    mutate(meanFreq = map2_dbl(freq1, freq2,~ mean(c(.x,.y)))))
 dot_plot.discrete<-freqs%>% # filter so only those used are plotted
   ggplot(aes(x=freq1,y=freq2))+
   geom_point(aes(color=as.factor(floor(log10(gc_ul)))))+

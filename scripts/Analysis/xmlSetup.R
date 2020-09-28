@@ -4,7 +4,8 @@ require(glue)
 meta<-read_csv("./data/all_meta.sequence_success.csv")
 
 
-intraHostVariants <-read_csv("data/Intrahost_initially_present.csv") %>% filter(freq1<0.5,within_host_time>0)
+intraHostVariants <-read_csv("data/Intrahost_all.csv") %>% filter(freq1<0.5,within_host_time>0)
+# intraHostVariants <-read_csv("data/Intrahost_initially_present.csv") %>% filter(freq1<0.5,within_host_time>0)
 
 meta<-meta %>% 
   filter(snv_qualified==TRUE,SPECID %in% c(intraHostVariants$SPECID1,intraHostVariants$SPECID2))%>% 
@@ -12,7 +13,10 @@ meta<-meta %>%
          floorLogGcUL = floor(log10(gc_ul)))
 
 
-doc<-xml_new_root("Beast")
+
+
+
+doc<-xml_new_root("dataBlock")
 # make Samples
 makeSample<-function(data){
   sample<-xml_add_child(doc,"sample")
@@ -55,15 +59,13 @@ intraHostVariants %>% rowwise() %>%
 
 # Make iSNV list of final frequencies
 finalFreqs<-xml_add_child(doc,"isnvList")
-xml_attr(isnvTraces,"id")<-"finalFreqs"
+xml_attr(finalFreqs,"id")<-"finalFreqs"
 
 intraHostVariants %>% rowwise() %>%
   group_walk(~(function(x){
-    var<-xml_add_child(initialFreqs,"isnv")
+    var<-xml_add_child(finalFreqs,"isnv")
     xml_attr(var,"idref")<-glue('{x$SPECID2}_{x$mutation}')
   })(.x))
-
-
 
 # make isnv traces 
 
@@ -83,4 +85,5 @@ intraHostVariants %>% rowwise() %>%
 
 
 
-write_xml(doc,"./test.xml")
+# write_xml(doc,"xmls/initial.dataBlock.xml")
+write_xml(doc,"xmls/alliSNV.dataBlock.xml")

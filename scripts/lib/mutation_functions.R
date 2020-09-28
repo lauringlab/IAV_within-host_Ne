@@ -55,7 +55,7 @@ calculateVariantLL<-function(var,mu,Ne,t,gc_ul){
     return(0)
   }
   return(log(g_ft(mu=mu,Ne=Ne,t=t,
-       x=var$freq.var,gc_ul = gc_ul,acc=accuracy_stringent)))
+       x=var$freq.var,gc_ul = gc_ul,acc=NULL)))
 }
 
 #' Likelihood of frequency starting at 0

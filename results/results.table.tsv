@@ -1,6 +1,6 @@
 -----------Mutation rate-----------
-Mu:	3.41392248035653e-06 : [3.10207548504093e-06 - 3.74815530367392e-06]
-Ne_spec:	36.138458635742 :[31.4597740342952 - 41.1366837777076]
+Mu:	3.41392248447244e-06 : [3.10207548503462e-06 - 3.74815530369608e-06]
+Ne_spec:	36.1384583584844 :[31.4597740319863 - 41.1366837783856]
 Samples used:	196
 Samples without variants	41
 ------Effective population size------
@@ -14,8 +14,8 @@ Diffusion model 12 Ne:	17
 S Ne 12:	27
 NS Ne 12:	19
 
-Subset median 6 Ne:	42.2113657313173
-Subset IQR 6 Ne:	4.93111058556821
+Subset median 6 (100) Ne:	42.2113657313173
+Subset IQR 6 (100) Ne:	4.93111058556821
 
 Samples exactly 1 day apart:	
 iSNV in samples exaclty 1 day apart:	

@@ -2,6 +2,7 @@ require(tidyverse)
 require(bbmle)
 require(glue)
 require(furrr)
+require(progressr)
 source("scripts/lib/kimuraFunctions.R")
 source("./scripts/lib/utils.R")
 
@@ -13,9 +14,10 @@ vars %>%
   ungroup() %>% mutate(samp = map(data,slice_sample,size=1)) %>%
   select(samp) %>% unnest(samp)
 
+# ------Seting up Analysis ----------------
 # make list of 1000 dataframes each with 1 var/person
 runs<-list()
-for(i in 1:1000){
+for(i in 1:100){
   runs[[i]]<-vars %>%
     group_by(ENROLLID) %>%   # prep for work by Species
     nest() %>%              # --> one row per Species
@@ -35,12 +37,19 @@ kimLLFactory<-function(data,gen_time){
   return(kimLL)
 }
 
-plan(multisession, workers = 10)
+plan(multisession, workers = 4)
+# ------Running Model ----------------
 
-results<-future_map(runs,~mle2(kimLLFactory(.x,6),method="L-BFGS-B",lower=c(0)))
+with_progress({
+  p <- progressor(steps = length(runs))
+  results<-future_map(runs,~{
+    p()
+    mle2(kimLLFactory(.x,6),method="L-BFGS-B",lower=c(0))
+    },.progress = T)
+})
 
 Ne<-map_dbl(results,~coef(.x)[1])
 
-write_to_summary("Subset median 6 Ne:",median(Ne))
-write_to_summary("Subset IQR 6 Ne:",IQR(Ne))
+write_to_summary("Subset median 6 (100) Ne",median(Ne))
+write_to_summary("Subset IQR 6 (100) Ne",IQR(Ne))
 
