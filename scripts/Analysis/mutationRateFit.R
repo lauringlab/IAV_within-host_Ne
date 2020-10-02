@@ -52,7 +52,7 @@ write_to_summary("Samples without variants",length(meta_one$ENROLLID)-length(uni
 
 base<-seq(1,9,0.5)
 power<- -6  #seq(-7,-5,1)
-Ne <- seq(10,80,1)
+Ne <- seq(10,90,1)
 
 mu.df<-expand.grid(base,power)
 mu = mu.df$Var1*10^mu.df$Var2
