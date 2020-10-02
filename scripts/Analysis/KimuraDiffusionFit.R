@@ -15,7 +15,7 @@ write_to_summary("S iSNV n", nrow(Svars))
 
 kimLLFactory<-function(data,gen_time){
   
-  kimLL<-function(Ne=30){
+  kimLL<-function(Ne=10){
     if(Ne<=0){
       return(1e10)
     }
@@ -40,17 +40,17 @@ write_to_summary("S Ne:",glue('{kimuraFitS@coef} :[{confint(kimuraFitSProf)[1]} 
 
 #------------ Model fit generation time 12 ----------------------------
 
-kimura12Fit<-mle2(kimLLFactory(vars,12),method="L-BFGS-B",lower=c(0))
+kimuraFit12<-mle2(kimLLFactory(vars,12),method="L-BFGS-B",lower=c(0))
 kimuraFit12Prof<-profile(kimuraFit12)
 write_to_summary("Diffusion model 12 Ne:",glue('{kimuraFit12@coef} :[{confint(kimuraFit12Prof)[1]} - {confint(kimuraFit12Prof)[2]}]'))
 
 kimuraFit12NS<-mle2(kimLLFactory(NSvars,12),method="L-BFGS-B",lower=c(0))
 kimuraFit12NSProf<-profile(kimuraFit12NS)
-write_to_summary("NS 12 Ne:",glue('{kimuraFit12NS@coef} :[{confint(kimuraFit12NSProf)[1]} - {confint(kimuraFit12NSProf)[2]}]'))
+write_to_summary("NS Ne 12:",glue('{kimuraFit12NS@coef} :[{confint(kimuraFit12NSProf)[1]} - {confint(kimuraFit12NSProf)[2]}]'))
 
 kimuraFit12S<-mle2(kimLLFactory(Svars,12),method="L-BFGS-B",lower=c(0))
 kimuraFit12SProf<-profile(kimuraFit12S)
-write_to_summary("S 12 Ne:",glue('{kimuraFit12S@coef} :[{confint(kimuraFit12SProf)[1]} - {confint(kimuraFit12SProf)[2]}]'))
+write_to_summary("S Ne 12:",glue('{kimuraFit12S@coef} :[{confint(kimuraFit12SProf)[1]} - {confint(kimuraFit12SProf)[2]}]'))
 
 
 

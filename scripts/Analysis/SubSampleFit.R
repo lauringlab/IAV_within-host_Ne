@@ -7,24 +7,28 @@ source("scripts/lib/kimuraFunctions.R")
 source("./scripts/lib/utils.R")
 
 
-vars<-read_csv("data/Intrahost_initially_present.csv") %>% filter(within_host_time>0,freq1<0.5)
-vars %>%
-  group_by(ENROLLID) %>%   # prep for work by Species
-  nest() %>%              # --> one row per Species
-  ungroup() %>% mutate(samp = map(data,slice_sample,size=1)) %>%
-  select(samp) %>% unnest(samp)
+# vars<-read_csv("data/Intrahost_initially_present.csv") %>% filter(within_host_time>0,freq1<0.5)
+# # vars %>%
+# #   group_by(ENROLLID) %>%   # prep for work by Species
+# #   nest() %>%              # --> one row per Species
+# #   ungroup() %>% mutate(samp = map(data,slice_sample,size=1)) %>%
+# #   select(samp) %>% unnest(samp)
+# 
+# # ------Seting up Analysis ----------------
+# # make list of 1000 dataframes each with 1 var/person
+# runs<-list()
+# for(i in 1:500){
+#   runs[[i]]<-vars %>%
+#     group_by(ENROLLID) %>%   # prep for work by Species
+#     nest() %>%              # --> one row per Species
+#     ungroup() %>% mutate(samp = map(data,slice_sample,size=1)) %>%
+#     select(samp) %>% unnest(samp)
+# }
 
-# ------Seting up Analysis ----------------
-# make list of 1000 dataframes each with 1 var/person
-runs<-list()
-for(i in 1:100){
-  runs[[i]]<-vars %>%
-    group_by(ENROLLID) %>%   # prep for work by Species
-    nest() %>%              # --> one row per Species
-    ungroup() %>% mutate(samp = map(data,slice_sample,size=1)) %>%
-    select(samp) %>% unnest(samp)
-}
+# save(runs,file="results/subsampleiSNVs.RData")
 
+
+load("results/subsampleiSNVs.RData")
 
 kimLLFactory<-function(data,gen_time){
   
@@ -37,7 +41,7 @@ kimLLFactory<-function(data,gen_time){
   return(kimLL)
 }
 
-plan(multisession, workers = 4)
+plan(multisession, workers = 9)
 # ------Running Model ----------------
 
 with_progress({
@@ -50,6 +54,8 @@ with_progress({
 
 Ne<-map_dbl(results,~coef(.x)[1])
 
-write_to_summary("Subset median 6 (100) Ne",median(Ne))
-write_to_summary("Subset IQR 6 (100) Ne",IQR(Ne))
+write_to_summary("Subset median 6 (500) Ne:",median(Ne))
+write_to_summary("Subset IQR 6 (500) Ne:",IQR(Ne))
 
+
+save(list = ls(all=TRUE), file = "results/subSampleRun_2020-09-28.RData")
