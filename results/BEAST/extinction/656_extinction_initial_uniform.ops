@@ -1,0 +1,8 @@
+
+Operator analysis
+Operator                                          Tuning   Count      Time     Time/Op  Pr(accept) Smoothed_Pr(accept)
+scale(NeParameter)                                0.476   214929     200462   0.93     0.2334      0.21        
+p0                                                1.184   3227426    1619831  0.5      0.234       0.26        
+pt_raw                                            3.612   3229199    1625361  0.5      0.2341      0.21        
+bitFlip(pt_indicators)                                    3228446    1621681  0.5      0.0367      0.0         
+

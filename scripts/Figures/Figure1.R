@@ -30,11 +30,12 @@ mutationRateAnalysis<-read_csv("./results/mutationRateFit.csv")
 
 top<-mutationRateAnalysis[mutationRateAnalysis$LL==max(mutationRateAnalysis$LL),]
 
-tiles.p<-ggplot(mutationRateAnalysis,aes(x=Ne,y=mu,z=LL))+
+tiles.p<-ggplot(filter(mutationRateAnalysis,mu>=2e-6,mu<6e-6),aes(x=Ne,y=mu,z=LL))+
   scale_y_log10(breaks = seq(1e-6,1e-5,1e-6))+
-  stat_contour(breaks = c(-3315,seq(-3320,-4000,by=-50)),aes(color = ..level..),show.legend = F) +
+  stat_contour(breaks = c(-3315,seq(-3320,-4000,by=-10)),aes(color = ..level..),show.legend = F) +
   geom_point(data=top,aes(x=Ne,y=mu)) + theme_cowplot()
 
+tiles.p
 # tiles.p<-direct.label(tiles.p,method=list("bottom.pieces"))
 tiles.p<-tiles.p +  theme(text=element_text(family = 'Helvetica',size=12))
 tiles.p
@@ -52,10 +53,10 @@ embed_fonts("./results/Figures/Figure1A.pdf")
 # 
 #-------------------------------------------------------------------------------
 
-hpd<-c(33,72)
+hpd<-c(32,72)
 
 
-kderaw<-read_tsv("results/initial.extinct.Ne.kde.tsv") %>% rename(Ne="combined.initial.extinct.1M.log",posterior = "NeParameter") 
+kderaw<-read_tsv("results/initial.extinct.Ne.kde.10K.tsv") %>% rename(Ne="combined.initial.extinct.1M.log",posterior = "NeParameter") 
 
 kde<-kderaw %>%
   # rbind(tibble(Ne=seq(0,min(kderaw$Ne)),posterior=0)) %>% 
@@ -68,6 +69,8 @@ kde<-kderaw %>%
       (type=="posterior" & Ne>hpd[1] &Ne<hpd[2]) ~"posterior",
     )
     )
+
+write_csv(kde,"./results/Figures/kde10K.csv")
   
 
 r2d3(data=kde, script = "scripts/Figures/Figure1x.js")

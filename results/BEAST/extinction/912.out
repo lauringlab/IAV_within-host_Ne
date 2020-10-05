@@ -1,0 +1,84 @@
+
+        BEAST v1.10.5 Prerelease #23570d1, 2002-2019
+       Bayesian Evolutionary Analysis Sampling Trees
+                 Designed and developed by
+   Alexei J. Drummond, Andrew Rambaut and Marc A. Suchard
+                              
+               Department of Computer Science
+                   University of Auckland
+                  alexei@cs.auckland.ac.nz
+                              
+             Institute of Evolutionary Biology
+                  University of Edinburgh
+                     a.rambaut@ed.ac.uk
+                              
+              David Geffen School of Medicine
+           University of California, Los Angeles
+                     msuchard@ucla.edu
+                              
+                Downloads, Help & Resources:
+                  	http://beast.community
+                              
+Source code distributed under the GNU Lesser General Public License:
+          	http://github.com/beast-dev/beast-mcmc
+                              
+                     BEAST developers:
+	Alex Alekseyenko, Guy Baele, Trevor Bedford, Filip Bielejec, Erik Bloomquist, Matthew Hall,
+	Joseph Heled, Sebastian Hoehna, Denise Kuehnert, Philippe Lemey, Wai Lok Sibon Li,
+	Gerton Lunter, Sidney Markowitz, Vladimir Minin, Michael Defoin Platel,
+          	Oliver Pybus, Chieh-Hsi Wu, Walter Xie
+                              
+                         Thanks to:
+    	Roald Forsberg, Beth Shapiro and Korbinian Strimmer
+
+Using BEAGLE library v3.1.0 for accelerated, parallel likelihood evaluation
+2009-, BEAGLE Working Group - https://beagle-dev.github.io/
+Citation: Ayres et al (2012) Systematic Biology 61: 170-173 | doi:10.1093/sysbio/syr100
+
+
+Random number seed: 912
+
+
+
+Failed to load parser: dr.inference.trace.DnDsPerSiteAnalysis
+line = dr.inference.trace.DnDsPerSiteAnalysis
+
+
+Failed to load parser: dr.inference.trace.CnCsPerSiteAnalysis
+line = dr.inference.trace.CnCsPerSiteAnalysis
+
+
+Failed to load parser: dr.inference.trace.CnCsToDnDsPerSiteAnalysis
+line = dr.inference.trace.CnCsToDnDsPerSiteAnalysis
+
+Loading additional development parsers from development_parsers.properties, which is additional set of parsers only available for development version ...
+
+Parsing XML file: extinction_initial_uniform.xml
+  File encoding: UTF8
+Looking for plugins in /Users/jtmccrone/VirusEvolution Dropbox/JT McCrone/projects/IAV_runs/plugins
+Loading plugin dr.KimuraDiffusionPlugin
+Loading jar file
+URL from loader: file:/Users/jtmccrone/VirusEvolution Dropbox/JT McCrone/projects/IAV_runs/plugins/dr.KimuraDiffusionPlugin.jar
+
+Optimization Schedule: log
+
+Likelihood computation is using an auto sizing thread pool.
+
+Creating the MCMC chain:
+  chain length = 10000000
+  operator adaption = true
+  adaptation delayed for 100000 steps
+
+Citations for this analysis: 
+
+FRAMEWORK
+BEAST primary citation:
+	Suchard MA, Lemey P, Baele G, Ayres DL, Drummond AJ, Rambaut A (2018) Bayesian phylogenetic and phylodynamic data integration using BEAST 1.10. Virus Evolution. vey016. DOI:10.1093/ve/vey016
+
+
+# BEAST v1.10.5 Prerelease #23570d1
+# Generated Fri Oct 02 13:34:26 BST 2020 [seed=912]
+# -working -overwrite -seed 912 -prefix 912_ extinction/extinction_initial_uniform.xml
+state	Joint       	Prior       	Likelihood  	Ne          	generationTime
+adaptationDelay = 100000 vs. loadedState = 0
+0	-50189.1384 	-6.8619     	-50182.2765 	30.0000     	6.0000      	-
